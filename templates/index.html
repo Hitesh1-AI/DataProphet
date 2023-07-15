@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataProphet</title>
+    <script>
+        function uploadCSV() {
+            const csvFile = document.getElementById("csvFile").files[0];
+            const formData = new FormData();
+            formData.append("csvFile", csvFile);
+
+            fetch("/upload", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response from the backend
+                    console.log(data);
+                })
+                .catch(error => {
+                    // Handle any errors
+                    console.error("Error:", error);
+                });
+        }
+
+    </script>
+</head>
+
+<body>
+    <form id="csvForm" enctype="multipart/form-data ">
+        <input type="file" id="csvFile" name="csvFile">
+        <button type="button" onclick="uploadCSV()">Upload</button>
+    </form>
+
+</body>
+
+</html>

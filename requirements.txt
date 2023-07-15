@@ -2,4 +2,10 @@ numpy
 pandas
 matplotlib
 scikit-learn
+dill
+fastapi
+uvicorn
+seaborn
+Jinja2
+python-multipart
 -e .
