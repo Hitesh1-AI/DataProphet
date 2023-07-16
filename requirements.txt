@@ -8,4 +8,6 @@ uvicorn
 seaborn
 Jinja2
 python-multipart
+catboost
+xgboost
 -e .

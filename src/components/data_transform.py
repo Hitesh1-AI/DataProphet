@@ -29,7 +29,7 @@ class DataTransform:
 
             num_pipeline = Pipeline(
                 steps=[
-                    ( 'Imputer',SimpleImputer(strategy='mean')),
+                    ('Imputer',SimpleImputer(strategy='mean')),
                     ('Normalization', StandardScaler())
                      
                 ]
@@ -41,8 +41,8 @@ class DataTransform:
             )
 
             if cat_features:
-                print(cat_features)
-                print('it still working-------------------------------------------------')
+                # print(cat_features)
+                # print('it still working-------------------------------------------------')
                 cat_pipeline = Pipeline(
                     steps=[
                         
@@ -70,7 +70,11 @@ class DataTransform:
             logging.info("Entered the Data Transform Method")
             train_data = pd.read_csv(train_path)
             test_data = pd.read_csv(test_path)
+            
             target_col = 'meantemp'
+            
+            train_data = train_data.dropna(subset=[target_col])
+            test_data = test_data.dropna(subset=[target_col])
 
             train_columns  = [col for col in train_data.columns if col not in 
                                     ['Date', 'date', 'DATE']]
@@ -107,7 +111,7 @@ class DataTransform:
             train_arr = np.c_[train_input_arr, target_train_df]
             test_arr = np.c_[test_input_arr, target_test_df]
 
-            print(train_arr[:5])
+            # print(train_arr[:5])
             # print(test_arr.shape)
             
             save_object(

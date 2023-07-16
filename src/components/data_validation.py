@@ -7,6 +7,7 @@ from dataclasses import dataclass
 
 from src.components.data_ingestion import DataIngestion
 from src.components.data_transform import DataTransform
+from src.components.model_trainer import ModelTrainer
 
 @dataclass
 class DataValidationConfig:
@@ -45,8 +46,8 @@ class DataValidation:
             logging.info("Read the dataset to Dataframe")
             os.makedirs(os.path.dirname(self.data_validation_config.row_data_path),exist_ok=True)
             data.to_csv(self.data_validation_config.row_data_path, header=True, index=False)
-            print(data.columns)
-            print(data.info())
+            # print(data.columns)
+            # print(data.info())
             logging.info("Data Validation is completed!!")
             logging.info("Validated Data is stored.")
             return (
@@ -64,6 +65,9 @@ if __name__ == '__main__':
 
     obj2 = DataTransform()
     train, test , _ = obj2.initate_data_transformation(train_path, test_path)
-    print("train : ", train)
-    print("-----------------------------")
-    print('test : ', test)
+    # print("train : ", train)
+    # print("-----------------------------")
+    # print('test : ', test)
+    print("Model is Training...")
+    model_trainer = ModelTrainer()
+    model_trainer.initiate_model_trainer(train, test)
