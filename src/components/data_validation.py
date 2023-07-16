@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from src.Exception import CustomException
 from src.logger import logging
+
 from dataclasses import dataclass
 
 from src.components.data_ingestion import DataIngestion
@@ -37,9 +38,11 @@ class DataValidation:
         except Exception as e:
             raise CustomException(e, sys)
 
-    def initiate_data_validation(self):
+    def initiate_data_validation(self, data_file_path):
         try:
+            logging.info("Entered in Data Validation")
             df = pd.read_csv('src/notebook/DailyDelhiClimateTest.csv')
+            # df = pd.read_csv(data_file_path)
             logging.info("Start the Data Validation")
             data = self.get_data_validation(df)
 
@@ -50,24 +53,26 @@ class DataValidation:
             # print(data.info())
             logging.info("Data Validation is completed!!")
             logging.info("Validated Data is stored.")
+
             return (
                 self.data_validation_config.row_data_path
             )
+        
         except Exception as e:
             raise CustomException(e, sys)
         
 
-if __name__ == '__main__':
-    obj = DataValidation()
-    path = obj.initiate_data_validation()
-    obj1 = DataIngestion()
-    train_path , test_path = obj1.initiate_data_ingestion(path)
+# if __name__ == '__main__':
+#     obj = DataValidation()
+#     path = obj.initiate_data_validation()
+#     obj1 = DataIngestion()
+#     train_path , test_path = obj1.initiate_data_ingestion(path)
 
-    obj2 = DataTransform()
-    train, test , _ = obj2.initate_data_transformation(train_path, test_path)
-    # print("train : ", train)
-    # print("-----------------------------")
-    # print('test : ', test)
-    print("Model is Training...")
-    model_trainer = ModelTrainer()
-    model_trainer.initiate_model_trainer(train, test)
+#     obj2 = DataTransform()
+#     train, test , _ = obj2.initate_data_transformation(train_path, test_path)
+#     # print("train : ", train)
+#     # print("-----------------------------")
+#     # print('test : ', test)
+#     print("Model is Training...")
+#     model_trainer = ModelTrainer()
+#     model_trainer.initiate_model_trainer(train, test)

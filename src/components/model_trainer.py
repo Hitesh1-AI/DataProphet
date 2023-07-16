@@ -30,6 +30,7 @@ class ModelTrainer:
 
     def initiate_model_trainer(self, train_arr, test_arr):
         try:
+            logging.info("Entered in Model Training")
             logging.info("Split the train and test Input data")
             X_train, y_train, X_test, y_test = (
                 train_arr[:,:-1],
