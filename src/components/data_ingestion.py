@@ -5,7 +5,7 @@ import sys
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
-from src.components.data_transform import DataTransform
+# from src.components.data_transform import DataTransform
 
 @dataclass
 class DataIngestionConfig:
@@ -17,14 +17,14 @@ class DataIngestion:
     def __init__(self):
         self.data_ingestion_config = DataIngestionConfig()
 
-    def initiate_data_ingestion(self):
+    def initiate_data_ingestion(self, row_data_path):
         logging.info("Entered the Data Ingestion Method")
         try:
-            df = pd.read_csv('src/notebook/DailyDelhiClimateTest.csv')
+            df = pd.read_csv(row_data_path)
 
-            logging.info("Read the dataset to Dataframe")
-            os.makedirs(os.path.dirname(self.data_ingestion_config.train_path),exist_ok=True)
-            df.to_csv(self.data_ingestion_config.row_data_path, header=True, index=False)
+            # logging.info("Read the dataset to Dataframe")
+            # os.makedirs(os.path.dirname(self.data_ingestion_config.train_path),exist_ok=True)
+            # df.to_csv(self.data_ingestion_config.row_data_path, header=True, index=False)
             
             logging.info("Train test split the data")
 
@@ -41,9 +41,9 @@ class DataIngestion:
         except Exception as e:
             raise CustomException(e, sys)
         
-if __name__== '__main__':
-    obj = DataIngestion()
-    train_path , test_path = obj.initiate_data_ingestion()
+# if __name__== '__main__':
+#     obj = DataIngestion()
+#     train_path , test_path = obj.initiate_data_ingestion()
 
-    obj2 = DataTransform()
-    obj2.initate_data_transformation(train_path, test_path)
+#     obj2 = DataTransform()
+#     obj2.initate_data_transformation(train_path, test_path)
