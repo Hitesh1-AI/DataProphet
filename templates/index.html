@@ -22,7 +22,7 @@
                     // Handle the response from the backend
                     console.log(data);
                     var resultContainer = document.getElementById("result-container");
-                    resultContainer.innerHTML = "File uploaded: " + data.filename;
+                    resultContainer.innerHTML = "";
                 })
                 .catch((error) => {
                     // Handle any errors

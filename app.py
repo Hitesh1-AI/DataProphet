@@ -32,9 +32,14 @@ async def upload_csv(csv_file: UploadFile = File(...)):
     try:
         logging.info("Api is starts working")
         contents = await csv_file.read()
+        filename = csv_file.filename
         # if csv_file.content_type != 'application/csv':
         #     raise Exception("File is not of the correct content type")
-        data_dir = os.path.join('artifacts', 'data')
+        data_dir = os.path.join('artifacts', 'data') # logging.info("Move to training pipeline")
+    
+        # train_pipeline = TrainingPipeline()
+        # score = train_pipeline.train_models(data_file_path)
+        # return score
         os.makedirs(data_dir, exist_ok=True)
         data_file_path = os.path.join(data_dir, 'new_data.csv')
         
@@ -47,7 +52,7 @@ async def upload_csv(csv_file: UploadFile = File(...)):
     
         train_pipeline = TrainingPipeline()
         score = train_pipeline.train_models(data_file_path)
-        return score
+        return score.tolist()
     
     except Exception as e:
         raise CustomException(e, sys)
