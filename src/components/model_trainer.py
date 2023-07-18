@@ -12,8 +12,8 @@ from sklearn.ensemble import (
 from sklearn.linear_model import LinearRegression
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.tree import DecisionTreeRegressor
-# from xgboost import XGBRegressor
-# from catboost import CatBoostRegressor
+from xgboost import XGBRegressor
+from catboost import CatBoostRegressor
 
 from src.Exception import CustomException
 from src.logger import logging
@@ -69,15 +69,15 @@ class ModelTrainer:
                     'n_estimators': [8,16,32,64,128,256]
                 },
                 "Linear Regression":{},
-                # "XGBRegressor":{
-                #     'learning_rate':[.1,.01,.05,.001],
-                #     'n_estimators': [8,16,32,64,128,256]
-                # },
-                # "CatBoosting Regressor":{
-                #     'depth': [6,8,10],
-                #     'learning_rate': [0.01, 0.05, 0.1],
-                #     'iterations': [30, 50, 100]
-                # },
+                "XGBRegressor":{
+                    'learning_rate':[.1,.01,.05,.001],
+                    'n_estimators': [8,16,32,64,128,256]
+                },
+                "CatBoosting Regressor":{
+                    'depth': [6,8,10],
+                    'learning_rate': [0.01, 0.05, 0.1],
+                    'iterations': [30, 50, 100]
+                },
                 "AdaBoost Regressor":{
                     'learning_rate':[.1,.01,0.5,.001],
                     # 'loss':['linear','square','exponential'],
@@ -109,9 +109,11 @@ class ModelTrainer:
             predicted = best_model.predict(X_test)
 
             score = r2_score(predicted, y_test)
-            print(score)
-            return score
-          
+            # print(score)
+            metric = {'Model Name ':best_model_name,
+                      'Model Accuracy': score}
+            print(metric)
+            return score          
         
         except Exception as e:
             raise CustomException(e, sys)

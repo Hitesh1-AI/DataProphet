@@ -41,8 +41,8 @@ class DataValidation:
     def initiate_data_validation(self, data_file_path):
         try:
             logging.info("Entered in Data Validation")
-            df = pd.read_csv('src/notebook/DailyDelhiClimateTest.csv')
-            # df = pd.read_csv(data_file_path)
+            # df = pd.read_csv('src/notebook/DailyDelhiClimateTest.csv')
+            df = pd.read_csv(data_file_path)
             logging.info("Start the Data Validation")
             data = self.get_data_validation(df)
 

@@ -71,7 +71,7 @@ class DataTransform:
             train_data = pd.read_csv(train_path)
             test_data = pd.read_csv(test_path)
             
-            target_col = 'meantemp'
+            target_col = 'price'
             
             train_data = train_data.dropna(subset=[target_col])
             test_data = test_data.dropna(subset=[target_col])

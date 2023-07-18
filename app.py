@@ -37,11 +37,8 @@ async def upload_csv(csv_file: UploadFile = File(...)):
         #     raise Exception("File is not of the correct content type")
         data_dir = os.path.join('artifacts', 'data') # logging.info("Move to training pipeline")
     
-        # train_pipeline = TrainingPipeline()
-        # score = train_pipeline.train_models(data_file_path)
-        # return score
         os.makedirs(data_dir, exist_ok=True)
-        data_file_path = os.path.join(data_dir, 'new_data.csv')
+        data_file_path = os.path.join(data_dir, filename)
         
         with open(data_file_path, 'wb') as file:
             file.write(contents)
