@@ -1,10 +1,12 @@
-from fastapi import FastAPI, UploadFile, File, Request
+from fastapi import FastAPI, UploadFile, File, Request, Form
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import numpy as np
 from typing import List
 
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
 import pandas as pd
 import os,sys
 
@@ -14,6 +16,8 @@ from src.logger import logging
 
 app = FastAPI()
 
+app.mount('/static', StaticFiles(directory="static"), name= "static")
+
 templates = Jinja2Templates(directory="templates")
 
 @app.get("/")
@@ -22,7 +26,7 @@ def read_root(requests: Request):
 
 
 @app.post("/upload")
-async def upload_csv(csv_file: UploadFile = File(...)):
+async def upload_csv(csv_file: UploadFile = File(...), target : str = Form(...)):
     # try:
     #     contents = await csv_file.read()
     #     filename = csv_file.filename
@@ -43,13 +47,14 @@ async def upload_csv(csv_file: UploadFile = File(...)):
         with open(data_file_path, 'wb') as file:
             file.write(contents)
         
-        # return 'File saved successfully'
-        
-        logging.info("Move to training pipeline")
+        # return f'File saved successfully and target variable is : {target}'
+        # redirect_url = "home.html"
+        # return RedirectResponse(url = redirect_url) #to redirect the new page after uploading the form data
+        # logging.info("Move to training pipeline")
     
-        train_pipeline = TrainingPipeline()
-        score = train_pipeline.train_models(data_file_path)
-        return score.tolist()
+        # train_pipeline = TrainingPipeline()
+        # score = train_pipeline.train_models(data_file_path, problem)
+        # return score.tolist()
     
     except Exception as e:
         raise CustomException(e, sys)

@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DataProphet</title>
+    <link rel="stylesheet" href="/static/css/style.css">
     <script>
         function uploadFile() {
             const fileInput = document.getElementById("csvFile");
             const file = fileInput.files[0];
+            const target = document.getElementById("target").value;
 
             const formData = new FormData();
             formData.append("csv_file", file);
+            formData.append("target", target);
 
             fetch("/upload", {
                 method: "POST",
@@ -21,8 +24,8 @@
                 .then((data) => {
                     // Handle the response from the backend
                     console.log(data);
-                    var resultContainer = document.getElementById("result-container");
-                    resultContainer.innerHTML = "";
+                    window.location.href= '/home.html';
+                   
                 })
                 .catch((error) => {
                     // Handle any errors
@@ -39,12 +42,36 @@
 </head>
 
 <body>
-    <form id="csvForm" enctype="multipart/form-data">
-        <input type="file" id="csvFile" name="csvFile">
-        <button type="button" id="uploadButton" onclick="uploadFile()">Upload</button>
-    </form>
-    <div id="result-container"></div>
+    <header>
+        <img src="/static/images/user.png" alt="#" srcset="">
+        <h1>DataProphet</h1>
+        <p>Revolutionizing AI in Business</p>
+    </header>
 
+    <section class="about">
+        <h2>About Us</h2>
+        <p>DataProphet is a cutting-edge AI company...</p>
+    </section>
+
+    <section class="contact">
+        <h2>Make Your Model</h2>
+        <form id="csvForm", enctype="multipart/form-data", action="/upload", method="post">
+            <label for="name">Target Variable:</label>
+            <input type="text" id="target" name="target" required>
+
+            <label for="file">Upload File:</label>
+            <input type="file" id="csvFile" name="csvFile">
+
+            <button type="button" id="uploadButton" onclick="uploadFile()">Upload</button>
+        </form>
+    </section>
+    <div class="footer">
+            <div class="icons">
+                <img class = 'git' src="/static/images/github.png" alt="">
+                <img class = 'linked' src="/static/images/linkedin-logo.png" alt="">
+            </div>
+            <p>All rights reserved</p>
+    </div>
 </body>
 
 </html>
