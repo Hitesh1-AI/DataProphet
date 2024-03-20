@@ -35,10 +35,10 @@ class TrainingPipeline:
                 score = model_trainer.initiate_model_trainer(train, test)
                 return score
             else:
-                # model_trainer = ClfModelTrainer()
-                # score = model_trainer.initiate_classification_training(train, test)
-                # return score
-                print('yeah its working')
+                model_trainer = ClfModelTrainer()
+                score = model_trainer.initiate_classification_training(train, test)
+                return score
+                # print('yeah its working')
                 logging.info('classification api call working!!')
         
         except Exception as e:

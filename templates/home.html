@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body{
-            margin: 0px;
-            padding: 0px;
-        }
-        .container h1{
-            font-family: 'Times New Roman', Times, serif;
-            text-align: center;
-        }
-    </style>
+    <title>Dataprophet.com</title>
+    <link rel="stylesheet" href="../static/css/home.css">
+    <script src="../static/js/index.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Wait for a Minunte....</h1>
-    </div>
+    <form class="main" id="csvForm">
+       
+       <div class="upload">
+            <img src="../static/images/file.png" alt="">
+            <h1>Upload Your Data</h1>
+            <input id ="csvFile" type="file" name="csvfile">
+        </div>
+        <div class="btn">
+            <button type="submit">Start Training</button>
+        </div>
+    </form>
+    <form action="/start-training" method="get">
+        <button type="submit">Start Training</button>
+    </form>
+    
 </body>
 </html>

@@ -23,11 +23,17 @@ class DataValidation:
         try:
             #first check for non datetime feature
             columns = [col for col in df.columns if col not in ['date', 'Date']]
-            count = 0
+            # count = 0
+            # for col in columns:
+            #     count = df[col].nunique()
+            #     if count > df.shape[0]*0.5 and df[col].dtype == 'O':
+            #         df[col] = df[col].str.replace(",", "").astype(float)
             for col in columns:
-                count = df[col].nunique()
-                if count > df.shape[0]*0.5 and df[col].dtype == 'O':
-                    df[col] = df[col].str.replace(",", "").astype(float)
+                if df[col].dtype == 'O':
+                    try:
+                        df[col] = df[col].str.replace(",", "").astype(float)
+                    except ValueError:
+                        print(f"Column '{col}' contains non-numeric values that cannot be converted to float.")
             
             #remove the id column as they are not an important for model
             for col in columns:

@@ -4,73 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataProphet</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script>
-        function uploadFile() {
-            const fileInput = document.getElementById("csvFile");
-            const file = fileInput.files[0];
-            const target = document.getElementById("target").value;
-
-            const formData = new FormData();
-            formData.append("csv_file", file);
-            formData.append("target", target);
-
-            fetch("/upload", {
-                method: "POST",
-                body: formData,
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    // Handle the response from the backend
-                    console.log(data);
-                    window.location.href= '/home.html';
-                   
-                })
-                .catch((error) => {
-                    // Handle any errors
-                    console.error("Error:", error);
-                });
-        }
-
-        document.getElementById("csvForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent default form submission
-            uploadFile(); // Call the uploadFile() function
-        });
-
-    </script>
+    <title>DataProphet.com</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/js/home.js"></script>
 </head>
 
-<body>
+<body id="m">
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <!-- <img src="dataprophet-logo.png" alt="DataProphet Logo">-->
+            <h1>Dataprophet</h1>
+        </div>
+        <div class="navbar-buttons">
+            <button class="login-button">Login</button>
+            <button class="dashboard-button">Dashboard</button>
+        </div>
+    </nav>
     <header>
-        <img src="/static/images/user.png" alt="#" srcset="">
-        <h1>DataProphet</h1>
-        <p>Revolutionizing AI in Business</p>
+        <img src="../static/images/triangles-1430105_1920.png" alt="Triangles image" srcset="" class="imgg">
+        <div class="centered-text">
+            <h1>DataProphet</h1>
+            <p>Revolutionizing AI in Business</p>
+        </div>
     </header>
+    <div class="users">
+        <div class="a">
+            <h2>Users</h2>
+            <h3>0</h3>
+        </div>
+        <div class="b">
+            <h2>Likes</h2>
+            <h3>0</h3>
+        </div>
+    </div>
+    <div class="models">
+        <h1 class="text">Create Your Model</h1>
+        <p class="texts">Do you want to create models with Dataprophet</p>
+        <a><span id="home" class="home">Try for free</span></a>
+        <!-- <a><span id="home" class="home">Try for free</span></a> -->
 
-    <section class="about">
-        <h2>About Us</h2>
-        <p>DataProphet is a cutting-edge AI company...</p>
-    </section>
+    </div>
 
-    <section class="contact">
-        <h2>Make Your Model</h2>
-        <form id="csvForm", enctype="multipart/form-data", action="/upload", method="post">
-            <label for="name">Target Variable:</label>
-            <input type="text" id="target" name="target" required>
-
-            <label for="file">Upload File:</label>
-            <input type="file" id="csvFile" name="csvFile">
-
-            <button type="button" id="uploadButton" onclick="uploadFile()">Upload</button>
-        </form>
-    </section>
-    <div class="footer">
-            <div class="icons">
-                <img class = 'git' src="/static/images/github.png" alt="">
-                <img class = 'linked' src="/static/images/linkedin-logo.png" alt="">
+    <div class="projects">
+        <h1>Select Your Problem:</h1>
+        <div class="project">
+            <div class="pr-1 projects-hover">
+                <img src="../static/images/user.png" alt="" class="pri-1">
+                <a href="problems.html">
+                    <p class="p">Regression</p>
+                </a>
             </div>
-            <p>All rights reserved</p>
+            <div class="pr-2 projects-hover">
+                <img src="../static/images/user.png" alt="" class="pri-1">
+                <a href="//problems.html">
+                    <p class="p">Classification</p>
+                </a>
+            </div>
+            <div class="pr-3 projects-hover">
+                <img src="../static/images/user.png" alt="" class="pri-1">
+                <a href="problems.html">
+                    <p class="p">Clustering</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="icons">
+            <a href="https://github.com/Hitesh1-AI"><img class='git' src="../static/images/github.png" alt="Github logo"></a>
+            <img class='linked' src="../static/images/linkedin-logo.png" alt="linkedIn logo">
+        </div>
+        <p>All rights reserved</p>
     </div>
 </body>
 

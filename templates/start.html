@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Start Training</title>
+    <script>
+        async function startTraining() {
+            const response = await fetch('/uploaded', {
+                method: 'POST',
+                body: new FormData(),
+            });
+            const result = await response.text();
+            document.getElementById('result').innerHTML = result;
+        }
+        startTraining();
+    </script>
+</head>
+<body>
+    <h1>Training in progress...</h1>
+    <div id="result"></div>
+</body>
+</html>

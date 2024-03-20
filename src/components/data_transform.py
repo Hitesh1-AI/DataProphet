@@ -47,8 +47,8 @@ class DataTransform:
                     steps=[
                         
                         ('Imputer', SimpleImputer(strategy='most_frequent')),
-                        ('OneHotEncode', OneHotEncoder(categories='auto', handle_unknown=True)),
-                        ('Normalization', StandardScaler())
+                        ('OneHotEncode', OneHotEncoder(categories='auto', handle_unknown='ignore')),
+                        ('Normalization', StandardScaler(with_mean= False))
                             
                     ]
                 )
@@ -103,15 +103,15 @@ class DataTransform:
             test_input_df = test_data[test_columns].drop(target_col, axis=1)
             target_test_df = test_data[target_col]
 
-            train_input_arr = preprocessor.fit_transform(train_input_df)
-            test_input_arr = preprocessor.transform(test_input_df)
+            train_input_arr = preprocessor.fit_transform(train_input_df).toarray()
+            test_input_arr = preprocessor.transform(test_input_df).toarray()
             logging.info("Preprocessor object is created")
-            # print(train_input_arr.shape)
-            # print(train_input_arr.colu)
-            train_arr = np.c_[train_input_arr, target_train_df]
-            test_arr = np.c_[test_input_arr, target_test_df]
+            print(train_input_arr.size)
+            print(target_train_df.shape)
+           
+            train_arr = np.c_[train_input_arr, np.array(target_train_df)]
+            test_arr = np.c_[test_input_arr, np.array(target_test_df)]
 
-            # print(train_arr[:5])
             # print(test_arr.shape)
             
             save_object(

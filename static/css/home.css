@@ -1,0 +1,55 @@
+body{
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+/* home page style */
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    width: 100%;
+}
+.main img{
+    height: 30px;
+    width: 30px;
+}
+.upload{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    border-color: lightgrey;
+    padding: 53px;
+    border-radius: 18px;
+}
+.upload input{
+    margin-left: 88px;
+}
+.btn{
+    display: grid;
+    align-items: center;
+    justify-self: center;
+    margin: 5px;
+}
+.btn button{
+    background-color: blue;
+    color: black;
+    margin: 29px;
+    width: 14rem;
+    height: 2rem;
+    border: none;
+    font-size: 19px;
+    font-weight: 500;
+    font-family: monospace;
+    border-radius: 6px;
+}
+button:hover{
+    background-color: blue;
+    opacity: 0.7;
+    transition: all o.4s;
+}
